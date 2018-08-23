@@ -3,14 +3,8 @@ from pyramid.response import Response
 
 
 class CompanyAPIView(APIViewSet):
-    def list(self, request):
-        return Response(json={'message': 'listing all the records'}, status=200)
 
-    def retrieve(self, request):
-        return Response(json={'message': 'listing one of the records'}, status=200)
+    def retrieve(self, request, id):
+        company_symbol = id
+        return Response(json={'company': f'''Here's the info for Ticker Symbol: {company_symbol}'''}, status=200)
 
-    def create(self, request):
-        return Response(json={'message': 'creating a new record'}, status=201)
-
-    def destroy(self, request):
-        return Response(json={'message': 'deleted the record'}, status=204)
