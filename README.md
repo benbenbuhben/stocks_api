@@ -12,6 +12,7 @@
 Python 3.7, Pyramid Resftul Framework, Pytest
 GitHub
  ## API
+
     - [x] GET / - the base API route
     - [x] POST /api/v1/auth/ - for registering a new account and signing up
     - [x] GET /api/v1/portfolio/{id}/ - for retrieving a user's portfolio
@@ -19,6 +20,7 @@ GitHub
     - [x] GET /api/v1/stock/{id}/ - for retrieving a companies information
     - [x] DELETE /api/v1/stock/{id} - for deleting a company record
     - [x] GET /api/v1/company/{symbol} - for retrieving company detail from 3rd party API, where `{symbol}` is variable
+
  ## Change Log
  08-22-2018 20:50 Basic Functionality Done
 
