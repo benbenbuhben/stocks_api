@@ -3,14 +3,7 @@ from pyramid.response import Response
 
 
 class PortfolioAPIView(APIViewSet):
-    def list(self, request):
-        return Response(json={'message': 'listing all the records'}, status=200)
+    def retrieve(self, request, id):
+        unique_id = id
+        return Response(json={'message': f'''The id you sent was {unique_id}'''}, status=200)
 
-    def retrieve(self, request):
-        return Response(json={'message': 'listing one of the records'}, status=200)
-
-    def create(self, request):
-        return Response(json={'message': 'creating a new record'}, status=201)
-
-    def destroy(self, request):
-        return Response(json={'message': 'deleted the record'}, status=204)

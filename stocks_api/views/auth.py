@@ -1,16 +1,10 @@
 from pyramid_restful.viewsets import APIViewSet
 from pyramid.response import Response
+import json
 
 
 class AuthAPIView(APIViewSet):
-    def list(self, request):
-        return Response(json={'message': 'listing all the records'}, status=200)
-
-    def retrieve(self, request):
-        return Response(json={'message': 'listing one of the records'}, status=200)
-
     def create(self, request):
-        return Response(json={'message': 'creating a new record'}, status=201)
-
-    def destroy(self, request):
-        return Response(json={'message': 'deleted the record'}, status=204)
+        my_database_is_a_variable = request.body
+        username = json.loads(my_database_is_a_variable)['username']
+        return Response(json=f'''{{'message': 'Created a record for {username}!'}}''', status=201)
