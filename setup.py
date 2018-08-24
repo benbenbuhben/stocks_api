@@ -14,8 +14,11 @@ requires = [
     'pyramid_debugtoolbar',
     'pyramid_jinja2',
     'pyramid_retry',
+    'pyramid-restful-framework' # Custom Install
     'pyramid_tm',
     'SQLAlchemy',
+    'json', # Custom Install
+    'textwrap', # Custom Install
     'transaction',
     'zope.sqlalchemy',
     'waitress',
