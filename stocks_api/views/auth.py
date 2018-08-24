@@ -9,4 +9,5 @@ class AuthAPIView(APIViewSet):
         """
         my_database_is_a_variable = request.body
         username = json.loads(my_database_is_a_variable)['username']
-        return Response(json={'message': f'''Created a record for {username}!'''}, status=201)
+        message = 'Created a record for {}!'.format(username)
+        return Response(json={'message': message}, status=201)

@@ -8,7 +8,8 @@ class StockAPIView(APIViewSet):
         """
         """
         unique_id = id
-        return Response(json={'company': f'''Here's the id for that company... {unique_id}'''}, status=200)
+        message = 'Here\'s the id for that company... {}'.format(unique_id)
+        return Response(json={'company': message}, status=200)
 
     def create(self, request):
         """
@@ -17,9 +18,10 @@ class StockAPIView(APIViewSet):
         name = json.loads(my_database_is_a_variable)['name']
         symbol = json.loads(my_database_is_a_variable)['symbol']
         portfolio_id = json.loads(my_database_is_a_variable)['portfolio_id']
-        return Response(json={'message': f'''Stock record for Portfolio ID#{portfolio_id} created for {name} (Ticker Symbol: {symbol})'''}, status=201)
+        message = 'Stock record for Portfolio ID#{} created for {} (Ticker Symbol: {})'.format(portfolio_id, name, symbol)
+        return Response(json={'message': message}, status=201)
 
     def destroy(self, request, id):
         """
         """
-        return Response(json={'message': 'Successfully deleted the record for ID#{id}'}, status=204)
+        return Response(json={'message': 'Successfully deleted the record for that id'}, status=204)

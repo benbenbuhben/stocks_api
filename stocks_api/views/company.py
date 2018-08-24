@@ -7,5 +7,6 @@ class CompanyAPIView(APIViewSet):
     def retrieve(self, request, id=None):
         """
         """
-        return Response(json={'company': f'''Here's the info for Ticker Symbol: {id}'''}, status=200)
+        message = 'Here is the info for Ticker Symbol: {}'.format(id)
+        return Response(json={'company': message}, status=200)
 

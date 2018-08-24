@@ -7,5 +7,6 @@ class PortfolioAPIView(APIViewSet):
         """
         """
         unique_id = id
-        return Response(json={'message': f'''The id you sent was {unique_id}'''}, status=200)
+        message = 'The id you sent was {}'.format(unique_id)
+        return Response(json={'message': message}, status=200)
 
