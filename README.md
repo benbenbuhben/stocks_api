@@ -25,5 +25,9 @@ GitHub
  08-22-2018 20:50 Basic Functionality Done
 
  08-23-2018 07:30 Added more routes
+
+ 08-27-2018 20:30 Added SQLAlchemy database models/schemata. Awaiting further guidance to incorporate into routes.
+
+ 08-27-2018 21:50 Incorporated 3rd-party API called IEX. You can retrieve stock info by hitting /api/v1/company/{symbol}/
  ## License
 This project is licensed under the MIT license
