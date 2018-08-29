@@ -17,7 +17,7 @@ GitHub
  ## API
 
 - [x] GET / - the base API route
-- [x] POST /api/v1/auth/register/ - for registering a new account or logging in, with the post body in the form: {"email": "bennyboy@gmail.com", "password": "seeeekret"}
+- [x] POST /api/v1/auth/register/ - for registering a new account or logging in, with the post body in the form: {"email": "bennyboy129802931@gmail.com", "password": "seeeekret"}
 - [x] POST /api/v1/portfolio/{id}/ - for creating a user's portfolio associated with their account, with post body in the form: {"name": "My Portfolio"}. NOTE: {id} is the account_id and will likely be 1 the first time
 - [x] POST /api/v1/stock/ - for creating a new company record associated with a specified portfolio, with post body in the form: {"symbol": "aapl", "portfolio_id": 1}
 - [x] GET /api/v1/portfolio/{id}/ - for retrieving a user's portfolio
