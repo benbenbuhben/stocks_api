@@ -16,11 +16,12 @@ from ..models import (
     get_tm_session,
     )
 # from ..models import MyModel
-from ..models import Portfolio
-from ..models import Stock
+from ..models import Portfolio, Stock, Account, AccountRole, roles_association
 
 
 def usage(argv):
+    """I don't know what this does.
+    """
     cmd = os.path.basename(argv[0])
     print('usage: %s <config_uri> [var=value]\n'
           '(example: "%s development.ini")' % (cmd, cmd))
@@ -28,6 +29,8 @@ def usage(argv):
 
 
 def main(argv=sys.argv):
+    """Function that enables initializedb CLI command.
+    """
     if len(argv) < 2:
         usage(argv)
     config_uri = argv[1]
@@ -42,10 +45,11 @@ def main(argv=sys.argv):
 
     # Below is used for seeding the DB
 
-    # session_factory = get_session_factory(engine)
+    session_factory = get_session_factory(engine)
 
-    # with transaction.manager:
-    #     dbsession = get_tm_session(session_factory, transaction.manager)
-
-    #     model = MyModel(name='one', value=1)
-    #     dbsession.add(model)
+    with transaction.manager:
+        dbsession = get_tm_session(session_factory, transaction.manager)
+        roles = ['admin', 'view']
+        for role in roles:
+            model = AccountRole(name=role)
+            dbsession.add(model)
