@@ -26,7 +26,7 @@ class Stock(Base):
     sector = Column(Text)
     date_created = Column(DateTime, default=dt.now())
     date_updated = Column(DateTime, default=dt.now(), onupdate=dt.now())
-    portfolio_id = Column(Integer, ForeignKey('portfolios.id'))
+    portfolio_id = Column(Integer, ForeignKey('portfolios.id'), nullable=False)
     portfolios = relationship('Portfolio', back_populates='stocks')
 
     @classmethod

@@ -20,7 +20,7 @@ class Portfolio(Base):
     date_created = Column(DateTime, default=dt.now())
     date_updated = Column(DateTime, default=dt.now(), onupdate=dt.now())
     stocks = relationship(Stock, back_populates='portfolios')
-    account_id = Column(Integer, ForeignKey('accounts.id'))
+    account_id = Column(Integer, ForeignKey('accounts.id'), nullable=False)
     accounts = relationship('Account', back_populates='portfolios')
 
     @classmethod
