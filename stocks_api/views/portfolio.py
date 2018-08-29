@@ -7,11 +7,13 @@ import json
 
 
 class PortfolioAPIView(APIViewSet):
-    def create(self, request):
+    def create(self, request, portfolio_id=None):
+        """Post method to create new portfolio
         """
-        """
+        import pdb; pdb.set_trace()
         try:
             kwargs = json.loads(request.body)
+            kwargs['account_id'] = portfolio_id
         except json.JSONDecodeError as e:
             return Response(json=e.msg, status=400)
 
@@ -28,7 +30,7 @@ class PortfolioAPIView(APIViewSet):
         return Response(json=data, status=201)
 
     def retrieve(self, request, id=None):
-        """
+        """Fetch one from database by id.
         """
         if not id:
             return Response(json='Not Found', status=404)

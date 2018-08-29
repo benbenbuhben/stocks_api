@@ -6,14 +6,14 @@ from .views.company import CompanyAPIView
 
 
 def includeme(config):
-    """
+    """Route adding and configuration
     """
     config.add_static_view('static', 'static', cache_max_age=3600)
     config.add_route('home', '/')
     config.add_route('lookup', 'api/v1/lookup/{symbol}')
 
     router = ViewSetRouter(config)
-    router.register('api/v1/auth', AuthAPIView, 'auth')
-    router.register('api/v1/portfolio', PortfolioAPIView, 'portfolio')
+    router.register('api/v1/auth/{auth}', AuthAPIView, 'auth')
+    router.register('api/v1/portfolio/{portfolio_id}', PortfolioAPIView, 'portfolio')
     router.register('api/v1/stock', StockAPIView, 'stock')
     router.register('api/v1/company', CompanyAPIView, 'company')
