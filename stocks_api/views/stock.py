@@ -1,5 +1,7 @@
 from ..models.schemas import StockSchema
 from ..models import Stock
+from ..models import Portfolio
+from ..models import Account
 from sqlalchemy.exc import IntegrityError, DataError
 from pyramid_restful.viewsets import APIViewSet
 from pyramid.response import Response
@@ -30,17 +32,22 @@ class StockAPIView(APIViewSet):
         try:
             # Add 3P API call here with parsed request. Make the response the kwargs below.
             symbol = json.loads(request.body)['symbol']
-            portfolio_id = json.loads(request.body)['portfolio_id']
+            # portfolio_id = json.loads(request.body)['portfolio_id']
             url = 'https://api.iextrading.com/1.0/stock/{}/company'.format(symbol)
             response = requests.get(url)
             kwargs = response.json()
             del kwargs['tags']
-            kwargs['portfolio_id'] = portfolio_id
+            # kwargs['portfolio_id'] = portfolio_id  # Delete?
 
         except json.JSONDecodeError as e:
             return Response(json=e.msg, status=400)
 
-        # Placeholder for if conditional at ~27:00, not sure if needed here
+        # Should I delete the way I was doing it before? We would want to use the
+        if request.authenticated_userid:
+            # import pdb; pdb.set_trace()
+            account = Account.one(request, request.authenticated_userid)
+            portfolio = Portfolio.oneByKwarg(request, account.id) #  Some logic to extract portfolio id by account_id
+            kwargs['portfolio_id'] = portfolio.id
 
         try:
             print(kwargs)

@@ -19,9 +19,9 @@ class Portfolio(Base):
     name = Column(Text)
     date_created = Column(DateTime, default=dt.now())
     date_updated = Column(DateTime, default=dt.now(), onupdate=dt.now())
-    stocks = relationship(Stock, back_populates='portfolios')
     account_id = Column(Integer, ForeignKey('accounts.id'), nullable=False)
     accounts = relationship('Account', back_populates='portfolios')
+    stocks = relationship(Stock, back_populates='portfolios')
 
     @classmethod
     def new(cls, request, **kwargs):
@@ -42,3 +42,12 @@ class Portfolio(Base):
         if request.dbsession is None:
             raise DBAPIError
         return request.dbsession.query(cls).get(pk)
+
+    @classmethod
+    def oneByKwarg(cls, request=None, kwarg=None):
+        """Method to retrieve a portfolio by a single kwarg
+        """
+        if request.dbsession is None:
+            raise DBAPIError
+        return request.dbsession.query(cls).filter(
+            cls.account_id == kwarg).one_or_none()

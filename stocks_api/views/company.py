@@ -16,7 +16,7 @@ import requests
 class CompanyAPIView(APIViewSet):
 
     def retrieve(self, request, id=None):
-        """Hit IEX API to retrieve info one one stock.
+        """Hit IEX API to retrieve info on one stock.
         """
         url = 'https://api.iextrading.com/1.0/stock/{}/company'.format(id)
         response = requests.get(url)
