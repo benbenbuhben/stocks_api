@@ -16,14 +16,24 @@ Python 3.7, Pyramid Resftul Framework, Pytest
 GitHub
  ## API
 
-- [x] GET / - the base API route
-- [x] POST /api/v1/auth/register/ - for registering a new account or logging in, with the post body in the form: {"email": "bennyboy129802931@gmail.com", "password": "seeeekret"}
-- [x] POST /api/v1/portfolio/{id}/ - for creating a user's portfolio associated with their account, with post body in the form: {"name": "My Portfolio"}. NOTE: {id} is the account_id and will likely be 1 the first time
-- [x] POST /api/v1/stock/ - for creating a new company record associated with a specified portfolio, with post body in the form: {"symbol": "aapl", "portfolio_id": 1}
-- [x] GET /api/v1/portfolio/{id}/ - for retrieving a user's portfolio
-- [x] GET /api/v1/stock/{id}/ - for retrieving a companies information
-- [x] DELETE /api/v1/stock/{id} - for deleting a company record
-- [x] GET /api/v1/company/{symbol} - for retrieving company detail from 3rd party API, where `{symbol}` is variable
+
+- **GET** / - the base API route
+
+The following routes return a token:
+- **POST** /api/v1/auth/register/ - for registering a new account or logging in, with the post body in the form: {"email": "bennyboy09823745@gmail.com", "password": "seeeekret"}
+- **POST** /api/v1/auth/login/ - for registering a new account or logging in, with the post body in the form: {"email": "bennyboy09823745@gmail.com", "password": "seeeekret"}
+
+The following routes require the token to be set as Bearer Token
+- **POST** /api/v1/portfolio/ - for creating a user's portfolio associated with their account, with post body in the form: `{"name": "My Portfolio"}`.
+
+- **POST** /api/v1/stock/ - for creating a new company record associated with a specified portfolio, with post body in the form: `{"symbol": "aapl"}`
+- **GET** /api/v1/portfolio/{id}/ - for retrieving a user's portfolio. Here `{id}` is the corresponding account id
+- **GET** /api/v1/stock/{id}/ - for retrieving a companies information. Here `{id}` is the corresponding portfolio id
+- **DELETE** /api/v1/stock/{id} - for deleting a company record
+
+The following route does not require a bearer token:
+- **GET** /api/v1/company/{symbol} - for retrieving company detail from 3rd party API, where `{symbol}` is variable
+
 
  ## Change Log
  08-22-2018 20:50 Basic Functionality Done
@@ -35,6 +45,9 @@ GitHub
  08-27-2018 21:50 Incorporated 3rd-party API called IEX. You can retrieve stock info by hitting /api/v1/company/{symbol}/
 
  08-28-2018 22:50 Added model relationships to the database as reflected in the API routes above
+
+ 08-29-2018 16:50 Added authentication functionality. Reference API section above.
+
 
  ## License
 This project is licensed under the MIT license

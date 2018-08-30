@@ -14,6 +14,6 @@ def includeme(config):
 
     router = ViewSetRouter(config)
     router.register('api/v1/auth/{auth}', AuthAPIView, 'auth')
-    router.register('api/v1/portfolio/{portfolio_id}', PortfolioAPIView, 'portfolio')
-    router.register('api/v1/stock', StockAPIView, 'stock')
-    router.register('api/v1/company', CompanyAPIView, 'company')
+    router.register('api/v1/portfolio', PortfolioAPIView, 'portfolio', permission='admin')
+    router.register('api/v1/stock', StockAPIView, 'stock', permission='admin')
+    router.register('api/v1/company', CompanyAPIView, 'company', permission='view')

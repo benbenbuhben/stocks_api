@@ -1,4 +1,5 @@
 from .associations import roles_association
+from cryptacular import bcrypt
 from .portfolio import Portfolio
 from datetime import datetime as dt
 from .meta import Base
@@ -13,6 +14,8 @@ from sqlalchemy import (
     String,
     DateTime,
 )
+
+manager = bcrypt.BCRYPTPasswordManager()
 
 
 class Account(Base):
@@ -29,7 +32,7 @@ class Account(Base):
 
     def __init__(self, email, password=None):
         self.email = email
-        self.password = password  # NOTE: This is unsafe and will be fixed.
+        self.password = manager.encode(password, 10)
 
     @classmethod
     def new(cls, request, email=None, password=None):
@@ -42,7 +45,18 @@ class Account(Base):
         request.dbsession.add(user)
 
         # TODO: Assign roles to new user
+        # This is unsafe!!!!
+        admin_role = request.dbsession.query(AccountRole).filter(
+            AccountRole.name == 'admin').one_or_none()
 
+        user.roles.append(admin_role)
+        request.dbsession.flush()
+
+        return request.dbsession.query(cls).filter(
+            cls.email == email).one_or_none()
+
+    @classmethod
+    def one(cls, request, email=None):
         return request.dbsession.query(cls).filter(
             cls.email == email).one_or_none()
 
@@ -50,5 +64,16 @@ class Account(Base):
     def check_credentials(cls, request, email, password):
         """Validate that user exists and they are who they say they are
         """
-        # TODO: Complete this tomorrow as part of the login process
-        pass
+        if request.dbsession is None:
+            raise DBAPIError
+        try:
+            account = request.dbsession.query(cls).filter(
+                cls.email == email).one_or_none()
+        except DBAPIError:
+            return None
+
+        if account is not None:
+            if manager.check(account.password, password):
+                return account
+
+        return None

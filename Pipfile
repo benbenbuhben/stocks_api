@@ -8,6 +8,8 @@ stocks-api = {editable = true, path = ".", extras = ["testing"]}
 pyramid-restful-framework = "*"
 requests = "*"
 waitress = "*"
+pyramid-jwt = "*"
+cryptacular = "*"
 
 [dev-packages]
 
