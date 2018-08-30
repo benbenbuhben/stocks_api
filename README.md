@@ -16,6 +16,7 @@ Python 3.7, Pyramid Resftul Framework, Pytest
 GitHub
  ## API
 
+
 - **GET** / - the base API route
 
 The following routes return a token:
@@ -32,6 +33,7 @@ The following routes require the token to be set as Bearer Token
 
 The following route does not require a bearer token:
 - **GET** /api/v1/company/{symbol} - for retrieving company detail from 3rd party API, where `{symbol}` is variable
+
 
  ## Change Log
  08-22-2018 20:50 Basic Functionality Done
