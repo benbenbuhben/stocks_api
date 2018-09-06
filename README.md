@@ -8,8 +8,9 @@
     2) In a separate terminal instance, run 'psql' to get into the psql shell
     3) Run ```create database stocks_api;``` and then ```\c stocks_api```
     4) Back in the main terminal instance, run ```initialize_stocks_api_db development.ini``` to setup the database
-    2) Run ```pserve development.ini --reload``` in the terminal to spin up the server.
-    3) Using the http client of your choice (I reccomend Postman), you can hit the server with various requests (refer to API section below). I recommend going through in the order listed.
+    5) Run ```pserve development.ini --reload``` in the terminal to spin up the server.
+    6) Using the http client of your choice (I reccomend Postman), you can hit the server with various requests (refer to API section below). I recommend going through in the order listed.
+    7) To test the data visualization GET route, I suggest using chrome to see the fully rendered html response.
 
  ## Architecture
 Python 3.7, Pyramid Resftul Framework, Pytest
@@ -32,7 +33,8 @@ The following routes require the token to be set as Bearer Token
 - **DELETE** /api/v1/stock/{id} - for deleting a company record
 
 The following route does not require a bearer token:
-- **GET** /api/v1/company/{symbol} - for retrieving company detail from 3rd party API, where `{symbol}` is variable
+- **GET** /api/v1/company/{symbol}/ - for retrieving company detail from 3rd party API, where `{symbol}` is variable
+- **GET** /api/v1/visuals/{symbol}/ - for plotting candelstick visualization of time series stock data, where `{symbol}` is variable
 
 
  ## Change Log
@@ -47,6 +49,8 @@ The following route does not require a bearer token:
  08-28-2018 22:50 Added model relationships to the database as reflected in the API routes above
 
  08-29-2018 16:50 Added authentication functionality. Reference API section above.
+
+ 09-05-2018 16:50 Added data visualization route. Reference API section above.
 
 
  ## License
