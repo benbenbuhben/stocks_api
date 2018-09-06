@@ -3,6 +3,7 @@ from .views.stock import StockAPIView
 from .views.portfolio import PortfolioAPIView
 from .views.auth import AuthAPIView
 from .views.company import CompanyAPIView
+from .views.visuals import VisualsAPIView
 
 
 def includeme(config):
@@ -16,4 +17,5 @@ def includeme(config):
     router.register('api/v1/auth/{auth}', AuthAPIView, 'auth')
     router.register('api/v1/portfolio', PortfolioAPIView, 'portfolio', permission='admin')
     router.register('api/v1/stock', StockAPIView, 'stock', permission='admin')
-    router.register('api/v1/company', CompanyAPIView, 'company', permission='view')
+    router.register('api/v1/company', CompanyAPIView, 'company')
+    router.register('api/v1/visuals', VisualsAPIView, 'visual')

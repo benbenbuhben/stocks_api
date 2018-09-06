@@ -10,6 +10,12 @@ requests = "*"
 waitress = "*"
 pyramid-jwt = "*"
 cryptacular = "*"
+pandas = "*"
+bokeh = "*"
+numpy = "*"
+sklearn = "*"
+scipy = "*"
+matplotlib = "*"
 
 [dev-packages]
 
