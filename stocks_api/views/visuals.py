@@ -1,25 +1,14 @@
 from pyramid_restful.viewsets import APIViewSet
-# from pyramid.view import view_config
 from pyramid.response import Response
 import requests
+from urllib.parse import urlparse
+import json
 
 # Imports from Jupyter Notebook
 import pandas as pd
 from math import pi
 from pandas.io.json import json_normalize
-# import numpy as np
-# import numpy.polynomial.polynomial as poly
-# from sklearn.model_selection import train_test_split
-# from sklearn.metrics import mean_squared_error
-# import matplotlib
-# import matplotlib.pyplot as py
-# from datetime import datetime as dt
-# import requests
-import json
 from bokeh.plotting import figure, output_file, save
-
-# %matplotlib inline
-# matplotlib.rcParams['figure.figsize'] = [12.0, 8.0]
 
 
 class VisualsAPIView(APIViewSet):
@@ -27,6 +16,9 @@ class VisualsAPIView(APIViewSet):
     def retrieve(self, request, id=None):
         """Hit IEX API to retrieve info on one stock.
         """
+        url_to_parse = request.current_route_url()  # returns http://localhost:6543/api/v1/visuals/goog/?type=candle
+        chart_type = urlparse(url_to_parse).query  # returns type=candlestick
+        print(chart_type)
         url = 'https://api.iextrading.com/1.0/stock/{}/chart/5y'.format(id)
         response = requests.get(url)
         df = json_normalize(json.loads(response.text))
@@ -59,9 +51,8 @@ class VisualsAPIView(APIViewSet):
         import codecs
         f = codecs.open('./static/candlestick.html', 'r')
         body = f.read()
-        print(body)
+        # print(body)
 
         return Response(body=body, status=200)
         # message = 'Here is the info for Ticker Symbol: {}'.format(id)
         # return Response(json={'company': message}, status=200)
-
